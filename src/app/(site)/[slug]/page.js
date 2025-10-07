@@ -327,13 +327,15 @@ export async function generateMetadata({ params }) {
   const destaqueFotoObj = fotosOrdenadas?.find((f) => f.Destaque === "Sim");
   const primeiraFoto = Array.isArray(fotosOrdenadas) && fotosOrdenadas.length > 0 ? fotosOrdenadas[0] : null;
   
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.npiconsultoria.com.br';
+  
   const destaqueFotoUrl = destaqueFotoObj?.Foto || 
                          destaqueFotoObj?.FotoPequena || 
                          primeiraFoto?.Foto || 
                          primeiraFoto?.FotoPequena ||
-                         `${process.env.NEXT_PUBLIC_SITE_URL}/og-image.png`;
+                         `${siteUrl}/og-image.png`;
   
-  const currentUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/${slug}`;
+  const currentUrl = `${siteUrl}/${slug}`;
   
   // ✅ Gerar data para o condomínio
   const modifiedDate = new Date().toISOString();
@@ -346,7 +348,7 @@ export async function generateMetadata({ params }) {
   return {
     title: `${rawTitle}, ${condominio.TipoEndereco} ${condominio.Endereco} ${condominio.Numero}, ${condominio.BairroComercial}`,
     description,
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL),
+    metadataBase: new URL(siteUrl),
     robots: {
       index: true,
       follow: true,
@@ -464,8 +466,9 @@ export default async function CondominioPage({ params }) {
   // Principal primeiro + demais por valor crescente + sem decimais desnecessários
   const imoveisOrdenados = ordenarImoveisRelacionados(imoveisRelacionados, condominio.Codigo);
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.npiconsultoria.com.br';
   const rawTitle = ensureCondominio(condominio.Empreendimento);
-  const currentUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/${slug}`;
+  const currentUrl = `${siteUrl}/${slug}`;
   const modifiedDate = new Date().toISOString();
 
   // 🎯 EXTRAIR ID DO VÍDEO - ADICIONADO
@@ -508,7 +511,7 @@ export default async function CondominioPage({ params }) {
         "name": "NPI Consultoria",
         "logo": {
           "@type": "ImageObject",
-          "url": `${process.env.NEXT_PUBLIC_SITE_URL}/logo.png`
+          "url": `${siteUrl}/logo.png`
         }
       },
       "potentialAction": {

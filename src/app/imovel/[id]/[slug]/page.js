@@ -374,6 +374,7 @@ export const revalidate = 0;
 
 export async function generateMetadata({ params }) {
   const { id } = params;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.npiconsultoria.com.br';
   
   console.error(`[IMOVEL-META] =========== PROCESSANDO ID: ${id} ===========`);
   
@@ -476,8 +477,8 @@ export async function generateMetadata({ params }) {
             type: "image/jpeg",
           },
           {
-            url: `${process.env.NEXT_PUBLIC_SITE_URL}/og-image.png`,
-            secureUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/og-image.png`,
+            url: `${siteUrl}/og-image.png`,
+            secureUrl: `${siteUrl}/og-image.png`,
             width: 1200,
             height: 630,
             alt: "NPI Consultoria - Imóveis",
@@ -523,6 +524,7 @@ export async function generateMetadata({ params }) {
 
 export default async function ImovelPage({ params }) {
   const { id, slug } = params;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.npiconsultoria.com.br';
   
   console.log(`🏠 [IMOVEL-PAGE] =================== INÍCIO ===================`);
   console.log(`🏠 [IMOVEL-PAGE] Processando ID: ${id}, SLUG: ${slug}`);
@@ -583,8 +585,8 @@ export default async function ImovelPage({ params }) {
 
     const slugValido = imovel.Slug && !slugsInvalidos.includes(imovel.Slug) ? imovel.Slug : null;
     const currentUrl = slugValido 
-      ? `${process.env.NEXT_PUBLIC_SITE_URL}/imovel-${imovel.Codigo}/${slugValido}`
-      : `${process.env.NEXT_PUBLIC_SITE_URL}/imovel-${imovel.Codigo}`;
+      ? `${siteUrl}/imovel-${imovel.Codigo}/${slugValido}`
+      : `${siteUrl}/imovel-${imovel.Codigo}`;
     
     const modifiedDate = convertBrazilianDateToISO(imovel.DataHoraAtualizacao, imovel);
     const lcpImageUrl = getLCPOptimizedImageUrl(imovel.Foto);

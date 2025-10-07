@@ -23,7 +23,7 @@ export const metadata = {
   authors: [{ name: "NPi Imóveis" }],
   creator: "NPi Imóveis",
   publisher: "NPi Imóveis",
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_SITE_URL}`),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.npiconsultoria.com.br'),
   robots: {
     index: true,
     follow: true,
@@ -40,7 +40,7 @@ export const metadata = {
   openGraph: {
     title: "NPi Imóveis - HUB de Imobiliárias Boutique de Alto Padrão",
     description: "Somos um HUB de imobiliárias Boutique que atuam com venda de imóveis de alto padrão, apartamentos e casas de luxo.",
-    url: process.env.NEXT_PUBLIC_SITE_URL,
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.npiconsultoria.com.br',
     siteName: "NPi Imóveis",
     type: "website",
     locale: "pt_BR",
@@ -96,11 +96,12 @@ export default async function Home() {
   }
 
   // Structured Data adicional para datas
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.npiconsultoria.com.br';
   const structuredDataDates = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": process.env.NEXT_PUBLIC_SITE_URL,
-    url: process.env.NEXT_PUBLIC_SITE_URL,
+    "@id": siteUrl,
+    url: siteUrl,
     name: "NPi Imóveis - HUB de Imobiliárias Boutique de Alto Padrão",
     description: "Somos um HUB de imobiliárias Boutique de alto padrão, e trabalhamos com Venda de apartamentos e casas de luxo.",
     datePublished: new Date().toISOString(),
@@ -108,10 +109,10 @@ export default async function Home() {
     author: {
       "@type": "Organization",
       name: "NPi Imóveis",
-      url: process.env.NEXT_PUBLIC_SITE_URL,
+      url: siteUrl,
       logo: {
         "@type": "ImageObject",
-        url: `${process.env.NEXT_PUBLIC_SITE_URL}/assets/images/logo-npi.png`
+        url: `${siteUrl}/assets/images/logo-npi.png`
       }
     },
     publisher: {
@@ -119,15 +120,15 @@ export default async function Home() {
       name: "NPi Imóveis",
       logo: {
         "@type": "ImageObject",
-        url: `${process.env.NEXT_PUBLIC_SITE_URL}/assets/images/logo-npi.png`
+        url: `${siteUrl}/assets/images/logo-npi.png`
       }
     },
     mainEntity: {
       "@type": "Organization",
       name: "NPi Imóveis",
       alternateName: "NPi Consultoria",
-      url: process.env.NEXT_PUBLIC_SITE_URL,
-      logo: `${process.env.NEXT_PUBLIC_SITE_URL}/assets/images/logo-npi.png`,
+      url: siteUrl,
+      logo: `${siteUrl}/assets/images/logo-npi.png`,
       description: "HUB de imobiliárias Boutique de alto padrão especializado em apartamentos e casas de luxo",
       address: {
         "@type": "PostalAddress",
@@ -155,7 +156,7 @@ export default async function Home() {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: process.env.NEXT_PUBLIC_SITE_URL
+          item: siteUrl
         }
       ]
     }

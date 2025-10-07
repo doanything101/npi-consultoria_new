@@ -101,9 +101,40 @@ This should now complete successfully without requiring the `MONGODB_URI` to be 
 - All TypeScript files (.ts) and JavaScript files (.js) in the API routes directory were updated
 - This fix maintains backward compatibility - the runtime behavior remains unchanged
 
+## Second Build Error - Invalid URL
+
+### Problem
+After fixing the MongoDB issue, a second error appeared:
+```
+TypeError: Invalid URL
+    at new URL (node:internal/url:825:25)
+    input: 'undefined'
+Error: Failed to collect page data for /
+```
+
+This occurred because `process.env.NEXT_PUBLIC_SITE_URL` was undefined during build time, and the code was trying to create a URL with `undefined` as input.
+
+### Solution
+Added fallback values for all `process.env.NEXT_PUBLIC_SITE_URL` usages in metadata and URL generation:
+
+**Pattern used**:
+```javascript
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.npiconsultoria.com.br';
+```
+
+**Files fixed**:
+- `src/app/page.js` - Home page metadata
+- `src/app/(site)/[slug]/page.js` - Condominium pages metadata
+- `src/app/imovel/[id]/[slug]/page.js` - Property pages metadata
+- `src/app/imovel/[id]/[slug]/componentes/ValoresUnidade.js` - WhatsApp share component
+
 ## Files Changed
 - `src/app/lib/mongodb.ts` (1 file)
 - API route files (54 files total)
+- Page metadata files (4 files)
+- Component files (1 file)
+
+**Total: 60 files modified**
 
 ## Estimated Impact
 - ✅ Build process will no longer fail due to missing environment variables

@@ -27,9 +27,10 @@ export default function ValoresUnidade({ imovel }) {
   ];
   
   const slugValido = imovel.Slug && !slugsInvalidos.includes(imovel.Slug) ? imovel.Slug : null;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.npiconsultoria.com.br';
   const url = slugValido 
-    ? `${process.env.NEXT_PUBLIC_SITE_URL}/imovel-${imovel.Codigo}/${slugValido}`
-    : `${process.env.NEXT_PUBLIC_SITE_URL}/imovel-${imovel.Codigo}`;
+    ? `${siteUrl}/imovel-${imovel.Codigo}/${slugValido}`
+    : `${siteUrl}/imovel-${imovel.Codigo}`;
   function sendWhatsapp() {
     const isMobile = () => {
       return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
