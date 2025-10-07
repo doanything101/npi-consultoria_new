@@ -6,6 +6,8 @@ import NodeCache from "node-cache";
 const cache = new NodeCache({ stdTTL: 3600 });
 const CACHE_KEY = "condominios_destaque";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     // Verificar se os dados estão em cache
