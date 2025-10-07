@@ -38,6 +38,13 @@ export default function AdminLogin() {
     setError("");
     setSuccess("");
 
+    // Check if Firebase auth is initialized
+    if (!auth) {
+      setError("Serviço de autenticação não disponível. Por favor, recarregue a página.");
+      setIsAuthenticating(false);
+      return;
+    }
+
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       if (userCredential.user) {

@@ -128,13 +128,70 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.npiconsultoria.
 - `src/app/imovel/[id]/[slug]/page.js` - Property pages metadata
 - `src/app/imovel/[id]/[slug]/componentes/ValoresUnidade.js` - WhatsApp share component
 
+## Third Build Error - Firebase Client Initialization
+
+### Problem
+After fixing the previous errors, a third error appeared during static page generation:
+```
+FirebaseError: Firebase: Error (auth/invalid-api-key)
+Error occurred prerendering page "/admin/..."
+```
+
+This occurred on all admin pages because:
+- Firebase client SDK was initializing at module level during SSR/build
+- Environment variables for Firebase were not available or invalid during build
+- Next.js was trying to statically generate admin pages
+
+### Solution
+Modified Firebase client initialization to be build-safe and browser-only:
+
+**Changes to `src/app/lib/firebase.ts`**:
+- Check if code is running in browser before initializing Firebase
+- Only initialize when valid API keys are available
+- Wrapped initialization in try-catch with proper error handling
+
+**Pattern used**:
+```typescript
+const isBrowser = typeof window !== 'undefined';
+
+if (isBrowser) {
+  const firebaseConfig = {
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || '',
+    // ... other config with fallbacks
+  };
+
+  if (firebaseConfig.apiKey && firebaseConfig.apiKey !== '') {
+    try {
+      app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+      auth = getAuth(app);
+      db = getFirestore(app);
+    } catch (error) {
+      console.error("Erro ao inicializar Firebase:", error);
+    }
+  }
+}
+```
+
+**Additional Safety Checks**:
+- Added auth availability checks in admin layout
+- Added auth availability checks in admin login page
+- Added auth availability checks in admin usuario page
+
+**Files modified**:
+- `src/app/lib/firebase.ts` - Made Firebase initialization browser-only
+- `src/app/admin/layout.js` - Added auth safety check
+- `src/app/admin/login/page.js` - Added auth safety check  
+- `src/app/admin/usuario/page.js` - Added auth safety checks
+
 ## Files Changed
 - `src/app/lib/mongodb.ts` (1 file)
+- `src/app/lib/firebase.ts` (1 file)
 - API route files (54 files total)
 - Page metadata files (4 files)
+- Admin pages with auth checks (3 files)
 - Component files (1 file)
 
-**Total: 60 files modified**
+**Total: 64 files modified**
 
 ## Estimated Impact
 - ✅ Build process will no longer fail due to missing environment variables

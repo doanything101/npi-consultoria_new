@@ -23,6 +23,8 @@ export default function UsuarioPage() {
 
   useEffect(() => {
     // Carregar dados do usuário atual
+    if (!auth) return;
+    
     const user = auth.currentUser;
     if (user) {
       setFormData((prev) => ({
@@ -45,6 +47,16 @@ export default function UsuarioPage() {
     e.preventDefault();
     setLoading(true);
     setMessage({ type: "", text: "" });
+
+    // Check if Firebase auth is initialized
+    if (!auth) {
+      setMessage({
+        type: "error",
+        text: "Serviço de autenticação não disponível. Por favor, recarregue a página.",
+      });
+      setLoading(false);
+      return;
+    }
 
     try {
       const user = auth.currentUser;

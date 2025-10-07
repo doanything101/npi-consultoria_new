@@ -26,6 +26,13 @@ export default function AdminLayout({ children }) {
     // Marcar componente como montado para evitar problemas de hidratação
     setMounted(true);
 
+    // Verificar se auth está disponível (pode não estar durante SSR)
+    if (!auth) {
+      setIsAuthLoading(false);
+      setIsLoggedIn(false);
+      return;
+    }
+
     // Verificar autenticação com Firebase
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
