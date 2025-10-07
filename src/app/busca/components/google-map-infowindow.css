@@ -1,0 +1,41 @@
+/* Estilos para InfoWindow do Google Maps - Prevenir scroll horizontal */
+.gm-style .gm-style-iw-c {
+  max-width: calc(100vw - 40px) !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.gm-style .gm-style-iw-d {
+  overflow: hidden !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.gm-style .gm-style-iw-t::after {
+  display: none !important;
+}
+
+/* Garantir que o conteúdo do InfoWindow não cause scroll */
+.gm-style-iw-chr {
+  overflow: hidden !important;
+}
+
+/* Container do mapa - prevenir overflow */
+.gm-style {
+  overflow: hidden !important;
+}
+
+/* Media query para telas muito pequenas */
+@media (max-width: 375px) {
+  .gm-style .gm-style-iw-c {
+    max-width: calc(100vw - 32px) !important;
+    padding: 8px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .gm-style .gm-style-iw-c {
+    max-width: calc(100vw - 24px) !important;
+    padding: 6px !important;
+  }
+}

@@ -1,0 +1,411 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1,
+h2,
+h3,
+h4,
+span,
+label,
+dl,
+dt,
+dd,
+ul,
+li,
+tr,
+th,
+option,
+select,
+input,
+textarea,
+button,
+address,
+a {
+  font-family: var(--font-michroma), Helvetica, sans-serif;
+}
+
+p {
+  font-family: var(--font-oxanium), Helvetica, sans-serif;
+}
+
+@layer utilities {
+  /* Esconde a barra de rolagem mas mantém a funcionalidade */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE e Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+/* ============================================
+   🗺️ ESTILOS LEAFLET COMPLETOS - MANTIDOS
+   ============================================ */
+
+/* Estilos para o Leaflet */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Garantir que o mapa não cubra outros elementos importantes */
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+
+/* Estilo Google Maps */
+.google-maps-style {
+  background-color: #f8f9fa;
+}
+
+.google-maps-style .leaflet-control-zoom {
+  border: none;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.google-maps-style .leaflet-control-zoom a {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  background-color: white;
+  border: none;
+  color: #666;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.google-maps-style .leaflet-control-zoom a:hover {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.google-maps-style .leaflet-control-zoom-in {
+  border-radius: 8px 8px 0 0;
+}
+
+.google-maps-style .leaflet-control-zoom-out {
+  border-radius: 0 0 8px 8px;
+}
+
+.google-maps-style .leaflet-control-attribution {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  color: #70757a;
+}
+
+/* Ajusta os popups para parecer com Google Maps */
+.google-maps-style .leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  padding: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.google-maps-style .leaflet-popup-content {
+  margin: 0;
+  padding: 12px 16px;
+}
+
+.google-maps-style .leaflet-popup-tip {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.leaflet-control-container .leaflet-control {
+  margin: 10px;
+}
+
+/* Ajustes para garantir que o mapa ocupe o espaço disponível */
+.h-\[600px\] .leaflet-container,
+.relative .leaflet-container {
+  min-height: 600px;
+}
+
+/* Estilos para o mapa em tela cheia */
+.absolute .leaflet-container {
+  height: 100%;
+  width: 100%;
+}
+
+/* ✅ MANTIDO: Estilos para o placeholder do mapa durante o SSR */
+.map-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e5e5;
+}
+
+/* ✅ MANTIDO: Estilos para a barra de pesquisa (GeoSearch) */
+.leaflet-control-geosearch {
+  width: 400px !important;
+  margin-top: 10px !important;
+  margin-left: 10px !important;
+}
+
+.leaflet-control-geosearch form {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+  border: none;
+  padding: 5px 10px;
+  height: 48px;
+}
+
+.leaflet-control-geosearch form input {
+  height: 36px;
+  border: none;
+  font-size: 15px;
+  padding-left: 12px;
+  color: #3c4043;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+
+.leaflet-control-geosearch form input:focus {
+  outline: none;
+}
+
+.leaflet-control-geosearch form button.glass {
+  background-color: transparent;
+  color: #4285f4;
+  margin-right: 8px;
+}
+
+.leaflet-control-geosearch form button.reset {
+  background-color: transparent;
+  color: #777;
+}
+
+.leaflet-control-geosearch .results {
+  margin-top: 2px;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+  border: none;
+  overflow: hidden;
+}
+
+.leaflet-control-geosearch .results > div {
+  padding: 10px 15px;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.leaflet-control-geosearch .results > div:hover,
+.leaflet-control-geosearch .results > div.active {
+  background-color: #f5f5f5;
+}
+
+/* ✅ MANTIDO: Estilos responsivos para telas menores */
+@media (max-width: 768px) {
+  .leaflet-control-geosearch {
+    width: calc(100% - 20px) !important;
+    max-width: 400px;
+  }
+}
+
+/* ✅ MANTIDO: Estilos para o controle de camadas */
+.google-maps-style .leaflet-control-layers {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+  overflow: hidden;
+  padding: 0;
+  margin-right: 10px;
+}
+
+.google-maps-style .leaflet-control-layers-toggle {
+  width: 40px;
+  height: 40px;
+  background-size: 22px 22px;
+  background-position: center;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.google-maps-style .leaflet-control-layers-expanded {
+  padding: 0;
+  width: 240px;
+  background: white;
+  border-radius: 8px;
+}
+
+.google-maps-style .leaflet-control-layers-expanded .leaflet-control-layers-list {
+  padding: 12px 16px;
+}
+
+.google-maps-style .leaflet-control-layers-selector {
+  margin: 0 5px 5px 0;
+}
+
+.google-maps-style .leaflet-control-layers-base label {
+  display: block;
+  padding: 6px 0;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-size: 14px;
+  color: #3c4043;
+}
+
+/* ✅ MANTIDO: Animação pulse */
+@keyframes pulse-opacity {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+.animate-pulse-opacity {
+  animation: pulse-opacity 1.5s infinite ease-in-out;
+}
+
+/* ============================================
+   📱 iOS CORREÇÕES OTIMIZADAS (Performance)
+   Mantém funcionalidade, remove excessos
+   ============================================ */
+
+/* 🔧 CORREÇÃO 1: Base essencial para todos inputs - REMOVIDO font-size global */
+input,
+textarea,
+select {
+  -webkit-appearance: none !important;
+  -webkit-text-size-adjust: 100% !important;
+  touch-action: manipulation !important;
+}
+
+/* 🎯 OTIMIZADO: Chrome iOS detection específica */
+@supports (-webkit-appearance: none) and (not (-webkit-backdrop-filter: blur(1px))) {
+  input, textarea, select {
+    /* ✅ REMOVIDO: user-scalable para acessibilidade */
+    -webkit-transform: translate3d(0,0,0) !important;
+    transform: translate3d(0,0,0) !important;
+  }
+}
+
+/* 🔧 CORREÇÃO 2: Mobile iOS básico - APENAS font-size em mobile */
+@media screen and (max-width: 768px) {
+  input, textarea, select {
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+    min-height: 44px !important; /* ✅ iOS touch target */
+    box-sizing: border-box !important;
+  }
+}
+
+/* 🔧 CORREÇÃO 3: Input types específicos - APENAS em mobile */
+@media screen and (max-width: 768px) {
+  input[type="search"],
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="password"],
+  input[type="number"] {
+    font-size: 16px !important;
+    -webkit-search-decoration: none !important;
+    -webkit-search-cancel-button: none !important;
+    -webkit-appearance: none !important;
+  }
+}
+
+/* 🎯 ESPECÍFICO: SearchHero component - essencial apenas */
+@media screen and (max-width: 768px) {
+  .search-hero-input {
+    font-size: 16px !important;
+    -webkit-appearance: none !important;
+    -webkit-text-size-adjust: 100% !important;
+    touch-action: manipulation !important;
+    min-height: 44px !important; /* ✅ Touch target adequado */
+  }
+}
+
+/* ✅ CORRIGIDO: Performance essenciais - APENAS mobile */
+@media screen and (max-width: 768px) {
+  * {
+    -webkit-tap-highlight-color: transparent !important;
+  }
+}
+
+html {
+  -webkit-overflow-scrolling: touch;
+  -webkit-text-size-adjust: 100% !important;
+}
+
+/* ✅ MANTIDO: GPU acceleration para vídeos */
+video {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* ✅ MANTIDO: Backdrop blur fix */
+.backdrop-blur input,
+.backdrop-blur-sm input {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* ✅ MANTIDO: Exceção para inputs do Leaflet */
+.leaflet-control-geosearch form input {
+  font-size: 15px !important; /* Mantém o estilo original do mapa */
+}
+
+/* ============================================
+   🔧 AJUSTAR LAYOUT BARRAS DE ROLAGEM
+   ============================================ */
+  
+/* Aplica a todos os elementos roláveis; ajusta width/height para manter a barra visível */
+* {
+  /* mantém o comportamento de scroll e a largura da barra */
+  scrollbar-width: auto; /* Firefox — não há seletor de botão aqui */
+}
+
+/* WebKit: botão (seta) vertical/horizontal -> escondido */
+*::-webkit-scrollbar-button {
+  display: none;      /* remove os botões */
+  width: 0;
+  height: 0;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Mantém a barra e o thumb visíveis — ajuste visual se quiser */
+*::-webkit-scrollbar {
+  width: 12px;   /* largura da barra vertical */
+  height: 12px;  /* altura da barra horizontal */
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+}
+
+/* (opcional) pista */
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ============================================
+   🔧 PLACEHOLDER RESPONSIVO (Performance)
+   ============================================ */
+@media screen and (max-width: 768px) {
+  input::placeholder, textarea::placeholder {
+    font-size: 12px !important; /* ✅ Otimizado */
+  }
+}
+
+@media screen and (min-width: 768px) {
+  input::placeholder, textarea::placeholder {
+    font-size: 14px !important;
+  }
+}
